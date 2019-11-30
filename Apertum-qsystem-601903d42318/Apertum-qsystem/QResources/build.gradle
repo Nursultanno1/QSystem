@@ -1,0 +1,26 @@
+plugins{
+    id 'java'
+    id 'idea'
+}
+
+group 'ru.apertum.qsystem'
+version '1.0-SNAPSHOT'
+sourceCompatibility = 1.8
+[compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '4.10' // Желаемая версия
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compileOnly(group: 'javax.help', name: 'javahelp', version: '2.0.05') { transitive = false }
+}
+
+jar {
+    archiveName = archivesBaseName + '.jar'
+    entryCompression ZipEntryCompression.STORED
+}

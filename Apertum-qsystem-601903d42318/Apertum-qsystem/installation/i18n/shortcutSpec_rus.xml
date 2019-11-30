@@ -1,0 +1,274 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<izpack:shortcuts version="5.0"
+                  xmlns:izpack="http://izpack.org/schema/shortcuts"
+                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  xsi:schemaLocation="http://izpack.org/schema/shortcuts http://izpack.org/schema/5.0/izpack-shortcuts-5.0.xsd">
+
+    <skipIfNotSupported/>
+    <programGroup defaultName="QSystem" location="startMenu"/>
+    <shortcut
+            os="windows"
+            name="Kиоск регистрации"
+            target="$INSTALL_PATH/Welcome.bat"
+            commandLine=""
+            workingDirectory="$INSTALL_PATH"
+            description="киоск регистрации"
+            iconFile="$INSTALL_PATH/icons/welcome.ico"
+            iconIndex="0"
+            initialState="normal"
+            programGroup="yes"
+            desktop="yes"
+            applications="no"
+            startMenu="no"
+            startup="no">
+        <createForPack name="Registration point"/>
+    </shortcut>
+    <shortcut
+            os="unix"
+            name="Kиоск регистрации"
+            target="sh"
+            commandLine="$INSTALL_PATH/welcome.sh"
+            workingDirectory="$INSTALL_PATH"
+            description="пункт регистрации"
+            type="Application"
+            encoding="UTF-8"
+            iconFile="$INSTALL_PATH/icons/welcome.png"
+            iconIndex="0"
+            initialState="normal"
+            programGroup="yes"
+            desktop="yes"
+            applications="no"
+            startMenu="no"
+            startup="no">
+        <createForPack name="Registration point"/>
+    </shortcut>
+
+
+    <shortcut
+            os="windows"
+            name="Pесепшен"
+            target="$INSTALL_PATH/Reception.bat"
+            commandLine=""
+            workingDirectory="$INSTALL_PATH"
+            description="Pесепшен"
+            iconFile="$INSTALL_PATH/icons/reception.ico"
+            iconIndex="0"
+            initialState="normal"
+            programGroup="yes"
+            desktop="yes"
+            applications="no"
+            startMenu="no"
+            startup="no">
+        <createForPack name="Reception"/>
+    </shortcut>
+    <shortcut
+            os="unix"
+            name="Pесепшен"
+            target="sh"
+            commandLine="$INSTALL_PATH/reception.sh"
+            workingDirectory="$INSTALL_PATH"
+            description="Pесепшен"
+            type="Application"
+            encoding="UTF-8"
+            iconFile="$INSTALL_PATH/icons/reception.png"
+            iconIndex="0"
+            initialState="normal"
+            programGroup="yes"
+            desktop="yes"
+            applications="no"
+            startMenu="no"
+            startup="no">
+        <createForPack name="Reception"/>
+    </shortcut>
+
+
+    <shortcut
+            os="windows"
+            name="Bызов из очереди"
+            target="$INSTALL_PATH/StartClient.bat"
+            commandLine=""
+            workingDirectory="$INSTALL_PATH"
+            description="Bызов из очереди"
+            iconFile="$INSTALL_PATH/icons/client.ico"
+            iconIndex="0"
+            initialState="normal"
+            programGroup="yes"
+            desktop="yes"
+            applications="no"
+            startMenu="no"
+            startup="no">
+        <createForPack name="Work place"/>
+    </shortcut>
+    <shortcut
+            os="unix"
+            name="Bызов из очереди"
+            target="sh"
+            commandLine="$INSTALL_PATH/client.sh"
+            workingDirectory="$INSTALL_PATH"
+            description="Bызов из очереди"
+            type="Application"
+            encoding="UTF-8"
+            iconFile="$INSTALL_PATH/icons/client.png"
+            iconIndex="0"
+            initialState="normal"
+            programGroup="yes"
+            desktop="yes"
+            applications="no"
+            startMenu="no"
+            startup="no">
+        <createForPack name="Work place"/>
+    </shortcut>
+
+    <shortcut
+            os="windows"
+            name="Рабочий стол"
+            target="$INSTALL_PATH/Desktop.bat"
+            commandLine=""
+            workingDirectory="$INSTALL_PATH"
+            description="Bызов из очереди"
+            iconFile="$INSTALL_PATH/icons/client.ico"
+            iconIndex="0"
+            initialState="normal"
+            programGroup="yes"
+            desktop="yes"
+            applications="no"
+            startMenu="no"
+            startup="no">
+        <createForPack name="Desktop"/>
+    </shortcut>
+    <shortcut
+            os="unix"
+            name="Рабочий стол"
+            target="sh"
+            commandLine="$INSTALL_PATH/desktop.sh"
+            workingDirectory="$INSTALL_PATH"
+            description="Bызов из очереди"
+            type="Application"
+            encoding="UTF-8"
+            iconFile="$INSTALL_PATH/icons/client.png"
+            iconIndex="0"
+            initialState="normal"
+            programGroup="yes"
+            desktop="yes"
+            applications="no"
+            startMenu="no"
+            startup="no">
+        <createForPack name="Desktop"/>
+    </shortcut>
+
+
+    <shortcut
+            os="windows"
+            name="Cервер QSystem"
+            target="$INSTALL_PATH/StartServer.bat"
+            commandLine=""
+            workingDirectory="$INSTALL_PATH"
+            description="Cервер QSystem"
+            iconFile="$INSTALL_PATH/icons/server.ico"
+            iconIndex="0"
+            initialState="normal"
+            programGroup="yes"
+            desktop="yes"
+            applications="yes"
+            startMenu="no"
+            startup="no">
+        <createForPack name="Server"/>
+    </shortcut>
+    <shortcut
+            os="unix"
+            name="Cервер QSystem"
+            target="sh"
+            commandLine="$INSTALL_PATH/server.sh"
+            workingDirectory="$INSTALL_PATH"
+            description="Cервер QSystem"
+            type="Application"
+            encoding="UTF-8"
+            iconFile="$INSTALL_PATH/icons/server.png"
+            iconIndex="0"
+            initialState="normal"
+            programGroup="yes"
+            desktop="yes"
+            applications="no"
+            startMenu="no"
+            startup="no">
+        <createForPack name="Server"/>
+    </shortcut>
+
+
+    <shortcut
+            os="windows"
+            name="Oбслуживание QSystem"
+            target="$INSTALL_PATH/StartAdmin.bat"
+            commandLine=""
+            workingDirectory="$INSTALL_PATH"
+            description="Oбслуживание QSystem"
+            iconFile="$INSTALL_PATH/icons/admin.ico"
+            iconIndex="0"
+            initialState="normal"
+            programGroup="yes"
+            desktop="yes"
+            applications="no"
+            startMenu="no"
+            startup="no">
+        <createForPack name="Administrator"/>
+    </shortcut>
+    <shortcut
+            os="unix"
+            name="Oбслуживание QSystem"
+            target="sh"
+            commandLine="$INSTALL_PATH/admin.sh"
+            workingDirectory="$INSTALL_PATH"
+            description="Oбслуживание QSystem"
+            type="Application"
+            encoding="UTF-8"
+            iconFile="$INSTALL_PATH/icons/admin.png"
+            iconIndex="0"
+            initialState="normal"
+            programGroup="yes"
+            desktop="yes"
+            applications="no"
+            startMenu="no"
+            startup="no">
+        <createForPack name="Administrator"/>
+    </shortcut>
+
+
+    <shortcut
+            os="windows"
+            name="удаление QSystem"
+            target="$INSTALL_PATH/Uninstaller/uninstaller.jar"
+            commandLine=""
+            workingDirectory="$USER_HOME"
+            description="удаление QSystem"
+            iconFile="$INSTALL_PATH/icons/uninstall.ico"
+            iconIndex="0"
+            initialState="normal"
+            programGroup="yes"
+            desktop="no"
+            applications="no"
+            startMenu="no"
+            startup="no">
+        <createForPack name="Main files"/>
+    </shortcut>
+    <shortcut
+            os="unix"
+            name="удаление QSystem"
+            target="java"
+            commandLine="-cp $INSTALL_PATH/Uninstaller/uninstaller.jar com.izforge.izpack.uninstaller.Uninstaller"
+            workingDirectory="$INSTALL_PATH"
+            description="удаление QSystem"
+            type="Application"
+            encoding="UTF-8"
+            iconFile="$INSTALL_PATH/icons/uninstall.png"
+            iconIndex="0"
+            initialState="normal"
+            programGroup="yes"
+            desktop="yes"
+            applications="no"
+            startMenu="no"
+            startup="no">
+        <createForPack name="Main files"/>
+    </shortcut>
+
+
+</izpack:shortcuts>

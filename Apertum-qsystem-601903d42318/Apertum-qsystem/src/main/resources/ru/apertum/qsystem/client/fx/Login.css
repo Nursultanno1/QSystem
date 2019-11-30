@@ -1,0 +1,19 @@
+/*
+ * Empty Stylesheet file.
+ */
+
+.mainFxmlClass {
+
+}
+
+#area{
+    -fx-background-color: bisque;
+}
+
+#baseArea{
+    -fx-background-color: skyblue;
+}
+
+#usersCbx{
+    -fx-font: 30px "Serif";
+}

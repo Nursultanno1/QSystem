@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration name="statica" monitorInterval="600">
+    <Properties>
+        <property name="app-name">${main:0}</property>
+        <property name="file-name">${app-name}</property>
+        <property name="logs-dir">logs</property>
+        <property name="arch-dir">${logs-dir}/archive</property>
+        <property name="log-size">10MB</property>
+        <property name="archive-count">10</property>
+
+        <Property name="pattern-console">%t[%p{length=1}] %m%n</Property>
+        <Property name="pattern-console-dev">%date{dd.MM.yy HH:mm.ss_SSS}[%p{length=1}] %m at %l%n</Property>
+        <Property name="pattern-file">%date{dd.MM.yy HH:mm.ss_SSS} %t[%p{length=1}] %m%n</Property>
+    </Properties>
+
+    <Appenders>
+        <Console name="console-info" target="SYSTEM_OUT">
+            <PatternLayout pattern="${pattern-console}"/>
+            <ThresholdFilter level="INFO" onMatch="ACCEPT" onMismatch="DENY"/>
+        </Console>
+
+        <Console name="console-dev" target="SYSTEM_OUT">
+            <PatternLayout pattern="${pattern-console-dev}" charset="${main:1}"/>
+        </Console>
+
+
+        <RollingFile name="file-debug" append="true"
+                     fileName="${logs-dir}/${file-name}.log"
+                     filePattern="${arch-dir}/${file-name}-%i.log.zip">
+
+            <ThresholdFilter level="DEBUG" onMatch="ACCEPT" onMismatch="DENY"/>
+            <PatternLayout pattern="${pattern-file}" charset="UTF-8"/>
+
+            <Policies>
+                <SizeBasedTriggeringPolicy size="${log-size}"/>
+            </Policies>
+            <DefaultRolloverStrategy min="1" max="${archive-count}" fileIndex="min" compressionLevel="9"/>
+        </RollingFile>
+
+        <RollingFile name="file-dev" append="true"
+                     fileName="${logs-dir}/${file-name}.log"
+                     filePattern="${arch-dir}/${file-name}-%i.log.zip">
+
+            <PatternLayout pattern="${pattern-file}" charset="UTF-8"/>
+
+            <Policies>
+                <SizeBasedTriggeringPolicy size="${log-size}"/>
+            </Policies>
+            <DefaultRolloverStrategy min="1" max="${archive-count}" fileIndex="min" compressionLevel="9"/>
+        </RollingFile>
+
+        <RollingFile name="file-reports" append="true"
+                     fileName="${logs-dir}/reports.log"
+                     filePattern="${arch-dir}/reports-%i.log.zip">
+
+            <PatternLayout pattern="${pattern-file}" charset="UTF-8"/>
+
+            <Policies>
+                <SizeBasedTriggeringPolicy size="${log-size}"/>
+            </Policies>
+            <DefaultRolloverStrategy min="1" max="${archive-count}" fileIndex="min" compressionLevel="9"/>
+        </RollingFile>
+
+        <RollingFile name="file-server-props" append="true" fileName="config/adminProperties.txt" filePattern="config/adminProperties-%i.zip">
+            <PatternLayout pattern="%m%n" charset="UTF-8"/>
+            <Policies>
+                <SizeBasedTriggeringPolicy size="${log-size}"/>
+            </Policies>
+            <DefaultRolloverStrategy min="1" max="2" fileIndex="min" compressionLevel="9"/>
+        </RollingFile>
+
+
+    </Appenders>
+
+    <!--
+        server,
+    client,
+    desktop,
+    reception,
+    admin,
+    welcome,
+    hardware_buttons,
+    tablo_redactor,
+    zone_board,
+    quser,
+
+    -->
+
+    <Loggers>
+
+        <Logger name="admin" level="trace" additivity="false">
+            <AppenderRef ref="console-dev"/>
+            <AppenderRef ref="file-dev"/>
+        </Logger>
+
+        <Logger name="server" level="trace" additivity="false">
+            <AppenderRef ref="console-dev"/>
+            <AppenderRef ref="file-dev"/>
+        </Logger>
+        <Logger name="reports" level="trace" additivity="false">
+            <AppenderRef ref="console-dev"/>
+            <AppenderRef ref="file-reports"/>
+        </Logger>
+
+        <Logger name="client" level="trace" additivity="false">
+            <AppenderRef ref="console-dev"/>
+            <AppenderRef ref="file-dev"/>
+        </Logger>
+
+        <Logger name="welcome" level="trace" additivity="false">
+            <AppenderRef ref="console-dev"/>
+            <AppenderRef ref="file-dev"/>
+        </Logger>
+
+        <Logger name="reception" level="trace" additivity="false">
+            <AppenderRef ref="console-dev"/>
+            <AppenderRef ref="file-dev"/>
+        </Logger>
+
+        <Logger name="desktop" level="trace" additivity="false">
+            <AppenderRef ref="console-dev"/>
+            <AppenderRef ref="file-dev"/>
+        </Logger>
+
+        <Logger name="zone_board" level="trace" additivity="false">
+            <AppenderRef ref="console-dev"/>
+            <AppenderRef ref="file-dev"/>
+        </Logger>
+
+        <Logger name="tablo_redactor" level="trace" additivity="false">
+            <AppenderRef ref="console-dev"/>
+            <AppenderRef ref="file-dev"/>
+        </Logger>
+
+        <Logger name="hardware_buttons" level="trace" additivity="false">
+            <AppenderRef ref="console-dev"/>
+            <AppenderRef ref="file-dev"/>
+        </Logger>
+
+        <Logger name="quser" level="trace" additivity="false">
+            <AppenderRef ref="console-dev"/>
+            <AppenderRef ref="file-dev"/>
+        </Logger>
+
+        <Logger name="adminProperties" level="trace" additivity="false">
+            <AppenderRef ref="file-server-props"/>
+        </Logger>
+
+        <Logger name="main" level="trace" additivity="false">
+            <AppenderRef ref="console-dev"/>
+            <AppenderRef ref="file-dev"/>
+        </Logger>
+
+        <Root level="info">
+            <AppenderRef ref="console-info"/>
+        </Root>
+    </Loggers>
+</Configuration>

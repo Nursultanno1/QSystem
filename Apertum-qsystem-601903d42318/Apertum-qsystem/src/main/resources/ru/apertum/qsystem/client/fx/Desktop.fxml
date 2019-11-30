@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import java.net.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ru.apertum.qsystem.client.fx.DesktopController">
+    <stylesheets>
+        <URL value="@Desktop.css" />
+    </stylesheets>
+
+
+    <center>
+      <ScrollPane fx:id="scrollPane" fitToHeight="true" fitToWidth="true">
+         <content>
+            <FlowPane fx:id="area" alignment="CENTER" columnHalignment="CENTER" hgap="60.0" maxWidth="1.7976931348623157E308" prefHeight="400.0" prefWidth="467.0" vgap="60.0">
+
+            </FlowPane>
+         </content>
+      </ScrollPane>
+    </center>
+    <left>
+        <AnchorPane fx:id="leftArea" prefHeight="400.0" prefWidth="140.0" BorderPane.alignment="CENTER">
+            <children>
+                <Button fx:id="refreshBtn" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#refresh" prefHeight="60.0" prefWidth="100.0" text="%refresh" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="14.0">
+                    <font>
+                        <Font size="16.0" />
+                    </font>
+                </Button>
+                <Button fx:id="closeBtn" layoutX="10.0" layoutY="326.0" mnemonicParsing="false" onAction="#close" prefHeight="60.0" prefWidth="100.0" text="%close" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0">
+                    <font>
+                        <Font size="16.0" />
+                    </font>
+                </Button>
+            </children>
+        </AnchorPane>
+    </left>
+</BorderPane>

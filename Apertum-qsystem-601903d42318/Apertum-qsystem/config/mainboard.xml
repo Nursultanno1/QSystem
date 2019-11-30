@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<board monitor="1" visible="$serverboard" x="100" y="100">
+        <parameters>
+                <leftColumn visible="true">
+                        <caption/>
+                        <font>Dialog-plain-75</font>
+                        <icon>config/board/customer.png</icon>
+                        <fontColors>
+                                <color>#ff0000</color>
+                                <color>#ff0090</color>
+                        </fontColors>
+                </leftColumn>
+                <rightColumn visible="true">
+                        <caption/>
+                        <font>Dialog-plain-75</font>
+                        <icon>config/board/point.png</icon>
+                        <fontColors>
+                                <color>#000000</color>
+                                <color>#000090</color>
+                        </fontColors>
+                </rightColumn>
+                <extColumn order="3" visible="false">
+                        <caption/>
+                        <font>Dialog-plain-75</font>
+                        <icon>config/board/customer.png</icon>
+                        <fontColors>
+                                <color>#000000</color>
+                        </fontColors>
+                </extColumn>
+                <row>
+                        <lineBorders>
+                                <border>5,0,0,0,#ffffaa</border>
+                                <border>5,0,0,0,#55aaff</border>
+                        </lineBorders>
+                        <lineColors>
+                                <color>#f1f1f1</color>
+                        </lineColors>
+                        <hint/>
+                        <hintColor>#f1f1f1</hintColor>
+                </row>
+                <header>
+                        <fontColor>#cc0033</fontColor>
+                        <font>Dialog-plain-40</font>
+                        <backgroundColor>#0186a0</backgroundColor>
+                        <border>0,0,0,0,#ffff00</border>
+                </header>
+                <rowCount>4</rowCount>
+                <columnCount>1</columnCount>
+                <backgroundImg>config/board/wall_ligth.jpg</backgroundImg>
+                <backgroundColor>#0186a0</backgroundColor>
+                <font>Dialog-plain-12</font>
+                <columnSeparator/>
+                <invitationMinTime>7</invitationMinTime>
+                <hideInvitationByStart>false</hideInvitationByStart>
+        </parameters>
+        <top size="0.12" visible="true">
+                <content/>
+                <runningText>config/board/run.txt</runningText>
+                <speedRunningText>5</speedRunningText>
+                <font>Dialog-plain-70</font>
+                <fontColor>#ffff00</fontColor>
+                <simpleDate>false</simpleDate>
+                <backgroundImg>config/board/wall.jpg</backgroundImg>
+                <videoFile/>
+                <fractal/>
+                <nextTable visible="false">
+                        <columnCount>1</columnCount>
+                        <rowCount>5</rowCount>
+                        <caption/>
+                        <border>0</border>
+                        <font>Dialog-plain-70</font>
+                        <fontColor>#ffff00</fontColor>
+                </nextTable>
+        </top>
+        <left size="0.24" visible="true">
+                <content/>
+                <runningText/>
+                <speedRunningText>4</speedRunningText>
+                <font>Dialog-plain-40</font>
+                <fontColor>#000000</fontColor>
+                <simpleDate>false</simpleDate>
+                <backgroundImg/>
+                <videoFile>config/board/video.mpg1</videoFile>
+                <fractal/>
+                <nextTable visible="true">
+                        <columnCount>2</columnCount>
+                        <rowCount>5</rowCount>
+                        <caption/>
+                        <border>0</border>
+                        <font>Dialog-plain-40</font>
+                        <fontColor>#000000</fontColor>
+                </nextTable>
+        </left>
+        <right size="0.47" visible="true">
+                <content><![CDATA[<html><body>
+<p align=center>
+<span style='font-size:30.0pt;color:red'>
+<u>Are you ready for a good time?</u>
+</span>
+</p>
+<div style='text-align: center;'>
+ <img src='config/board/q.png'>
+</div>
+<div style="margin: 10px;  padding: 10;">
+<p align=justify>
+<span style='font-size:16.0pt;color:blue;'>
+Добро пожаловать  Welcome  Mire se vini  Welkomma  Ahlan wa sahlan  Bari galoust  Xos gelmissiniz  Akwaba  Ongi etorri  Шчыра запрашаем  Swagata  Amrehba sisswene  Aani kie  Dobro dosli  Degemer mad  Добре дошъл  Kyo tzo pa eit  Benvinguts  Dobrodosli   Vitejte  Velkommen  Bonvenon  Tere tulemast  Gabite  Tervetuloa  Herzlich willkommen  Kalos ilthate  Eguahe pora  Mikouabo  Baroukh haba  Swaagat  Udvozlom  Nnoo  Selamat datang  Failte  Yokoso  Amrehva ysswene Chum reap suor   Dobrodosli  Hosgeldiniz ยินดีต้อนรับ   Vitame vas  Croeso Rahim itegez  Witajcie  Khosh amadid
+</span></p></div>
+</body></html>]]></content>
+                <runningText/>
+                <speedRunningText>7</speedRunningText>
+                <font>Dialog-plain-50</font>
+                <fontColor>#ffcccc</fontColor>
+                <simpleDate>false</simpleDate>
+                <backgroundImg/>
+                <videoFile>E:/media/nofile</videoFile>
+                <fractal>ex-config/fractal-part-board.xml</fractal>
+                <nextTable visible="false">
+                        <columnCount>1</columnCount>
+                        <rowCount>5</rowCount>
+                        <caption/>
+                        <border>0</border>
+                        <font>Dialog-plain-50</font>
+                        <fontColor>#ffcccc</fontColor>
+                </nextTable>
+        </right>
+        <bottom size="0.69" visible="true">
+                <content/>
+                <runningText/>
+                <speedRunningText>4</speedRunningText>
+                <font>Dialog-plain-65</font>
+                <fontColor>#ffff00</fontColor>
+                <simpleDate>true</simpleDate>
+                <backgroundImg>config/board/wall.jpg</backgroundImg>
+                <videoFile/>
+                <fractal/>
+                <nextTable visible="false">
+                        <columnCount>2</columnCount>
+                        <rowCount>4</rowCount>
+                        <caption/>
+                        <border>0</border>
+                        <font>Dialog-plain-65</font>
+                        <fontColor>#ffff00</fontColor>
+                </nextTable>
+        </bottom>
+        <bottom2 size="0.37" visible="true">
+                <content><![CDATA[http://127.0.0.1:8081/bottom2.html]]></content>
+                <runningText/>
+                <speedRunningText>4</speedRunningText>
+                <font>Dialog-plain-70</font>
+                <fontColor>#ffff00</fontColor>
+                <simpleDate>false</simpleDate>
+                <backgroundImg>config/board/wall.jpg</backgroundImg>
+                <videoFile/>
+                <fractal/>
+                <nextTable visible="false">
+                        <columnCount>2</columnCount>
+                        <rowCount>4</rowCount>
+                        <caption/>
+                        <border>0</border>
+                        <font>Dialog-plain-70</font>
+                        <fontColor>#ffff00</fontColor>
+                </nextTable>
+        </bottom2>
+        <invitePanel show="true" x="20" y="400">
+                <backgroundImg/>
+                <width>1240</width>
+                <height>300</height>
+                <showDelay>4</showDelay>
+                <htmlText><![CDATA[<p align=center><span style='font-size:80.0pt;color:black'>КЛИЕНТ &nbsp;&nbsp;&nbsp;&nbsp; ОКНО</span><BR><span style='font-size:160.0pt;color:red'> #client  →  #point #user #service #inputed</span></p>]]></htmlText>
+        </invitePanel>
+</board>

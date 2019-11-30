@@ -1,0 +1,31 @@
+/*
+ * Empty Stylesheet file.
+ */
+
+.mainFxmlClass {
+
+}
+
+#area{
+    -fx-background-color: skyblue;
+}
+
+#leftArea{
+    -fx-background-color: #999999;
+}
+
+.scroll-bar:vertical {
+    -fx-pref-width: 100;
+    -fx-padding: 0;
+    -fx-background-color: skyblue;
+}
+
+.scroll-bar:horizontal {
+    -fx-pref-height: 16.5;
+    -fx-padding: 3;
+}
+
+.scroll-bar, .scroll-bar:pressed, .scroll-bar:focused {
+    -fx-font-size: 15;
+}
+

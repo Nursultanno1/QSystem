@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.web.*?>
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane fx:id="area" prefHeight="480.0" prefWidth="850.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ru.apertum.qsystem.client.fx.SelectFirstDlgController">
+    <stylesheets>
+        <URL value="@SelectFirstDlg.css" />
+    </stylesheets>
+    <children>
+        <WebView fx:id="info" layoutY="206.0" prefHeight="274.0" prefWidth="583.0" />
+        <Button fx:id="inviteBtn" layoutX="599.0" layoutY="14.0" mnemonicParsing="false" onAction="#invite" prefHeight="100.0" prefWidth="240.0" text="%invite" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="14.0">
+            <font>
+                <Font size="35.0" />
+            </font>
+        </Button>
+        <Button fx:id="closeBtn" layoutX="599.0" layoutY="366.0" mnemonicParsing="false" onAction="#close" prefHeight="100.0" prefWidth="240.0" text="%close" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="14.0">
+            <font>
+                <Font size="35.0" />
+            </font>
+        </Button>
+        <Button fx:id="pickUpBtn" layoutX="599.0" layoutY="190.0" mnemonicParsing="false" onAction="#pickUp" prefHeight="100.0" prefWidth="240.0" text="%pick_up" AnchorPane.rightAnchor="14.0">
+            <font>
+                <Font size="35.0" />
+            </font>
+        </Button>
+        <AnchorPane fx:id="clientPane" prefHeight="200.0" prefWidth="583.0" />
+    </children>
+</AnchorPane>

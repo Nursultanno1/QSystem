@@ -1,0 +1,270 @@
+<html>
+    <head>
+        <meta charset="utf-8"/>
+        <title>Главное табло</title>
+        <script type="text/javascript">
+            function customerStandIn(json) {
+
+            }
+            function inviteCustomer(json) {
+
+            }
+            function workCustomer(json) {
+
+            }
+            function killCustomer(json) {
+
+            }
+        </script>
+
+        <script type="text/javascript">
+            rnd_comp_length = 2; /*устанавливаешь длинну массива, т.е. сколько цветов будет*/
+            colors_ = new Array(rnd_comp_length);
+            colors_[0] = "coral";
+            colors_[1] = "black";
+            var next_ = 0;
+
+            function blinkItems() {
+                headcolor = colors_[next_];/*headcolor - переменной устанавливаешь новый цвет*/
+                var el = document.getElementsByClassName("blink"); // мигаем стоящими к услуге
+                Array.prototype.forEach.call(el, function (item) {
+                    item.style.color = headcolor;/*присваеваешь этот цвет элементу в документе*/
+                });
+                next_++;
+                if (next_ > rnd_comp_length - 1) {
+                    next_ = 0;
+                }
+                window.setTimeout("blinkItems()", 500); /*спустя 1 секунду, меняешь цвет на новый, если нужно дольше, то ставишь число больше*/
+            }
+        </script>
+        <style type="text/css">
+            body{
+                background: #00CCCC;
+                margin: 0px;
+                padding: 0px;
+            }
+
+            th, td{
+                text-align: center;
+                margin: 0px;
+                padding: 0px;
+                border: 0px none black;
+            }
+
+            .invite_div{
+                background: #C7E3E4; 
+                width: 480px; /* Ширина колонки */
+                right: 220px; /* Сдвигаем влево на ширину колонки 3 */
+            }
+
+            .next_div{
+                background: wheat;
+                width: 220px; 
+                right: 0;
+            }
+
+            .user_div{
+                background: wheat; /* Цвет фона */
+                left: 0; /* Положение левого края */
+                right: 700px; /* Положение правого края */
+            }
+
+            .layout { 
+                position: relative; /* Относительное позиционирование */
+                height: 100%;
+                margin: 0px;
+                padding: 0px;
+            }
+            .layout DIV { 
+                position: absolute; /* Абсолютное позиционирование */ 
+                height: 100%;
+                margin: 0px;
+                padding: 0px;
+            }
+
+            .next_head{
+                font-size: 20.0pt;
+                color: midnightblue;
+            }
+
+            .next{
+                font-size: 30.0pt;
+                color: midnightblue;
+            }
+
+            .next_table{
+                height: 100%;
+                width: 100%;
+                border: 0px none black;
+                margin: 0px;
+                padding: 0px;
+            }
+
+            .invite_head{
+                font-size: 30.0pt;
+                color: midnightblue;
+            }
+
+            .invite{
+                font-size: 40.0pt;
+                color: brown;
+            }
+
+            .invite_table{
+                height: 100%;
+                width: 100%;
+                border: 0px none black;
+                margin: 0px;
+                padding: 0px;
+            }
+
+            .user{
+                font-size: 15.0pt;
+                color: midnightblue;
+            }
+
+            .user_inv{
+                font-size: 30.0pt;
+                color: brown;
+            }
+
+            .user_queue{
+                font-size: 20.0pt;
+                color: midnightblue;
+            }
+            .user_table{
+                height: 100%;
+                width: 100%;
+                border: 0px none black;
+                margin: 0px;
+                padding: 0px;
+            }
+
+        </style>
+    </head>
+
+    <body onload="blinkItems();/*скрипт запускается когда документ загрузился полностью*/">
+
+        <div class="layout">
+
+            <div class="user_div">
+                <table class="user_table">
+                    <tbody>
+                        <tr>
+                            <td><span class="user">Терапевт. {{1|point}} {{1|service}} {{1|discription}} {{1|user}}</span></td>
+                            <td><span class="user_inv"><span class="{{1|blink}}">{{1|queue1}}</span></span></td>
+                            <td><span class="user_queue">{{1|queue2}} {{1|queue3}} {{1|queue4}}</span></td>
+                        </tr>
+                        <tr>
+                            <td><span class="user">ЛОР. {{2|point}} {{2|service}} {{2|user}}</span></td>
+                            <td><span class="user_inv"><span class="{{2|blink}}">{{2|queue1}}</span></span></td>
+                            <td><span class="user_queue">{{2|queue2}} {{2|queue3}} {{2|queue4}}</span></td>
+
+                        </tr>
+                        <tr>
+                            <td><span class="user">Травмотолог. {{3|point}} {{3|service}} {{3|user}}</span></td>
+                            <td><span class="user_inv"><span class="{{3|blink}}">{{3|queue1}}</span></span></td>
+                            <td><span class="user_queue">{{3|queue2}} {{3|queue3}} {{3|queue4}}</span></td>
+                        </tr>
+                        <tr>
+                            <td><span class="user">Окулист. {{4|point}} {{4|service}} {{4|user}}</span></td>
+                            <td><span class="user_inv"><span class="{{4|blink}}">{{4|queue1}}</span></span></td>
+                            <td><span class="user_queue">{{4|queue2}} {{4|queue3}} {{4|queue4}}</span></td>
+                        </tr>
+                        <tr>
+                            <td><span class="user">Анализ крови. {{5|point}} {{5|service}} {{5|user}}</span></td>
+                            <td><span class="user_inv"><span class="{{5|blink}}">{{5|queue1}}</span></span></td>
+                            <td><span class="user_queue">{{5|queue2}} {{5|queue3}} {{5|queue4}}</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+
+            </div>
+
+
+
+            <div class="invite_div">
+
+                <table class="invite_table">
+                    <col width="50%">
+                    <col width="50%">
+                    <thead>
+                        <tr>
+                            <th>
+                                <span class="invite_head">Талон</span>
+                            </th>
+                            <th>
+                                <span class="invite_head">Кабинет</span>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr bgcolor="#C7EAFF">
+                            <td><span class="invite"><span class="{{blink1}}">{{ticket1}}</span></span></td>
+                            <td><span class="invite"><span class="{{blink1}}">{{point1}}</span></span></td>
+                        </tr>
+                        <tr>
+                            <td><span class="invite"><span class="{{blink2}}">{{ticket2}}</span></span></td>
+                            <td><span class="invite"><span class="{{blink2}}">{{point2}}</span></span></td>
+                        </tr>
+                        <tr bgcolor="#C7EAFF">
+                            <td><span class="invite"><span class="{{blink3}}">{{ticket3}}</span></span></td>
+                            <td><span class="invite"><span class="{{blink3}}">{{point3}}</span></span></td>
+                        </tr>
+                        <tr>
+                            <td><span class="invite"><span class="{{blink4}}">{{ticket4}}</span></span></td>
+                            <td><span class="invite"><span class="{{blink4}}">{{point4}}</span></span></td>
+                        </tr>
+                        <tr bgcolor="#C7EAFF">
+                            <td><span class="invite"><span class="{{blink5}}">{{ticket5}}</span></span></td>
+                            <td><span class="invite"><span class="{{blink5}}">{{point5}}</span></span></td>
+                        </tr>
+                    </tbody>
+                </table>
+
+            </div>
+
+
+            <div class="next_div">
+                <table class="next_table">
+                    <col width="100%">
+                    <thead>
+                        <tr>
+                            <th>
+                                <span class="next_head">Приготовиться</span>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><span class="next">{{next1}}</span></td>
+                        </tr>
+                        <tr>
+                            <td><span class="next">{{next2}}</span></td>
+                        </tr>
+                        <tr>
+                            <td><span class="next">{{next3}}</span></td>
+                        </tr>
+                        <tr>
+                            <td><span class="next">{{next4}}</span></td>
+                        </tr>
+                        <tr>
+                            <td><span class="next">{{next5}}</span></td>
+                        </tr>
+                        <tr>
+                            <td><span class="next">{{next6}}</span></td>
+                        </tr>
+                        <tr>
+                            <td><span class="next">{{next7}}</span></td>
+                        </tr>
+                        <tr>
+                            <td><span class="next">{{next8}}</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+
+    </body>
+</html>

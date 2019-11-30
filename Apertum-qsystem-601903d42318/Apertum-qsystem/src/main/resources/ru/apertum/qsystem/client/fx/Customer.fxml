@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox fx:id="area" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="200.0" minWidth="280.0" prefHeight="200.0" prefWidth="280.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ru.apertum.qsystem.client.fx.CustomerController">
+    <stylesheets>
+        <URL value="@Customer.css" />
+    </stylesheets>
+    <children>
+        <HBox prefHeight="100.0" prefWidth="280.0">
+            <children>
+                <ImageView fx:id="logo" fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="/ru/apertum/qsystem/client/fx/qsystem100.png" />
+                    </image>
+                </ImageView>
+                <Label fx:id="numberLbl" alignment="CENTER" prefHeight="100.0" prefWidth="180.0" text="Label" textAlignment="CENTER">
+                    <font>
+                        <Font size="50.0" />
+                    </font>
+                </Label>
+            </children>
+        </HBox>
+        <Label fx:id="serviceLbl" alignment="TOP_CENTER" prefHeight="65.0" prefWidth="280.0" text="Label adsf asdf sadf sdf sgf sfg dfg dfg  asdf adf asdf sdf sd sdf afasdf sdf sd sdf sdf" textAlignment="CENTER" wrapText="true">
+         <font>
+            <Font size="15.0" />
+         </font></Label>
+        <Label fx:id="customerLbl" alignment="BOTTOM_CENTER" prefHeight="35.0" prefWidth="280.0" text="Label" textFill="#a10808">
+         <font>
+            <Font size="24.0" />
+         </font></Label>
+    </children>
+</VBox>

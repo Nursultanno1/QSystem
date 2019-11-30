@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane fx:id="baseArea" prefHeight="400.0" prefWidth="702.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ru.apertum.qsystem.client.fx.LoginController">
+    <stylesheets>
+        <URL value="@Login.css" />
+    </stylesheets>
+    <children>
+        <AnchorPane fx:id="area" layoutX="14.0" layoutY="14.0" prefHeight="372.0" prefWidth="674.0">
+            <children>
+                <Button fx:id="enterBtn" layoutX="486.0" layoutY="14.0" mnemonicParsing="false" onAction="#enter" prefHeight="90.0" prefWidth="174.0" text="%enter">
+                    <font>
+                        <Font size="35.0" />
+                    </font>
+                </Button>
+                <Button fx:id="cancelBtn" cancelButton="true" layoutX="486.0" layoutY="268.0" mnemonicParsing="false" onAction="#cancel" prefHeight="90.0" prefWidth="174.0" text="%cancel">
+                    <font>
+                        <Font size="30.0" />
+                    </font>
+                </Button>
+                <ComboBox fx:id="usersCbx" layoutX="14.0" layoutY="174.0" prefHeight="50.0" prefWidth="420.0">
+                </ComboBox>
+                <PasswordField fx:id="inputPwd" layoutX="14.0" layoutY="282.0" prefHeight="50.0" prefWidth="420.0">
+                    <font>
+                        <Font size="29.0" />
+                    </font>
+                </PasswordField>
+                <Label fx:id="usersLbl" layoutX="14.0" layoutY="123.0" text="%user">
+                    <font>
+                        <Font size="35.0" />
+                    </font>
+                </Label>
+                <Label fx:id="pwdLbl" layoutX="14.0" layoutY="231.0" text="%password">
+                    <font>
+                        <Font size="35.0" />
+                    </font>
+                </Label>
+                <ImageView fx:id="logoImg" fitHeight="71.0" fitWidth="82.0" layoutX="14.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@/ru/apertum/qsystem/client/forms/resources/label.png" />
+                    </image>
+                </ImageView>
+                <ImageView fx:id="keyImg" fitHeight="150.0" fitWidth="155.0" layoutX="279.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@/ru/apertum/qsystem/client/forms/resources/key02.png" />
+                    </image>
+                </ImageView>
+                <Label fx:id="errorLbl" layoutX="538.0" layoutY="129.0" text="?!" textFill="RED">
+                    <font>
+                        <Font size="96.0" />
+                    </font>
+                </Label>
+            </children>
+        </AnchorPane>
+    </children>
+</AnchorPane>

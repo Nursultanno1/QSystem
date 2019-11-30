@@ -1,0 +1,65 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Example</title>
+        <style>
+            body{
+                background-color: bisque;
+            }
+            .txt {
+                position: absolute; /* Абсолютное позиционирование */
+                left: 5px; /* Положение от нижнего края */
+                top: 5px; /* Положение от правого края */
+                line-height: 15px;
+            }
+
+            .manRus {
+                position: absolute; /* Абсолютное позиционирование */
+                bottom: 55px; /* Положение от нижнего края */
+                right: 10px; /* Положение от правого края */
+                line-height: 15px;
+            }
+            .manEn {
+                position: absolute; /* Абсолютное позиционирование */
+                bottom: 5px; /* Положение от нижнего края */
+                right: 10px; /* Положение от правого края */
+                line-height: 15px;
+            }
+            .hello {
+                position: absolute; /* Абсолютное позиционирование */
+                left: 200px; /* Положение от нижнего края */
+                top: 75px; /* Положение от правого края */
+                line-height: 15px;
+                font-size: 20pt;
+                font-style: italic;
+            }
+        </style>
+    </head>
+    <body >
+        <div class="txt">
+            <p>
+                Когда труд — удовольствие, жизнь — хороша!<br>Когда труд — обязанность, жизнь — рабство!<p>Горький М.
+            </p>
+        </div> 
+        <div class="hello">    
+            <p>
+                Say Hello for QSystem!
+            </p>
+        </div>
+
+        <div class="manRus">
+            <p>
+                Вы можете описать каждую услугу.<br>
+                Для этого вы должны создать файл /config/desktop/[serviceId].png<br>
+                Станица по умолчанию может быть config/desktop/service.html
+            </p>
+        </div>
+        <div class="manEn">
+            <p>
+                You can make description for each service.<br>
+                For that you should create file /config/desktop/[serviceId].png<br>
+                A page by default could be /config/desktop/service.html
+            </p>
+        </div>
+    </body>
+</html>

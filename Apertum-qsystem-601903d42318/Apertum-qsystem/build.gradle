@@ -1,0 +1,789 @@
+plugins {
+    id 'java'
+    id 'idea'
+    id 'com.bmuschko.izpack' version '2.1'// это для плагина izpack
+    id 'org.sonarqube' version '2.7.1'
+    id 'checkstyle'
+    id 'jacoco'
+    /*jdk12
+    id 'application'
+    id 'org.openjfx.javafxplugin' version '0.0.7'
+     */
+}
+
+group 'ru.apertum.qsystem'
+sourceCompatibility = JavaVersion.VERSION_1_8
+targetCompatibility = JavaVersion.VERSION_1_8
+[compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
+
+test {
+    useTestNG()
+}
+
+task branch() {
+    println 'BRANCH: "' + getBranch() + '"';
+}
+
+project.tasks["sonarqube"].dependsOn "jacocoTestReport"
+
+jacocoTestReport {
+    reports {
+        xml.enabled true
+        xml.destination = file("${project.buildDir}/jacoco/jacoco.xml");
+    }
+}
+
+jacoco {
+    toolVersion = "0.8.4"
+    //reportsDir = file("$buildDir/customJacocoReportDir")
+}
+
+sonarqube {
+    properties {
+        property "sonar.branch.name", getBranch()
+        property "sonar.sourceEncoding", "UTF-8"
+        property "sonar.host.url", "https://sonarcloud.io"
+        property "sonar.projectKey", "Apertum_qsystem"
+        property "sonar.organization", "apertum-bitbucket"
+        property "sonar.login", "69c19eaeafee46dcbe5d8daf58edd5e54468af71"
+        property "sonar.coverage.jacoco.xmlReportPaths", "${project.buildDir}/jacoco/jacoco.xml"
+        property "sonar.exclusions", "**/*Test.java,**/*Test??.java"
+        property "sonar.coverage.exclusions", "**/*Test.java,**/*Test??.java"
+        property "sonar.java.binaries", sourceSets.main.output.classesDirs
+    }
+}
+
+checkstyle {
+    toolVersion '8.12'
+    configFile file("gradle/checkstyle/google_checks.xml")
+}
+
+checkstyleMain {
+    source = 'src/main/java'
+    exclude '**/*Test??.java'
+    exclude '**/*Test.java'
+}
+checkstyleTest {
+    enabled = false
+    source = 'src/test/java'
+}
+
+wrapper {
+    gradleVersion = '5.6.1' // Желаемая версия
+}
+
+/*jdk12
+mainClassName = 'ru.apertum.qsystem.client.fx.Desktop'
+javafx {
+    version = "12.0.1"
+    modules = [ 'javafx.controls', 'javafx.fxml', 'javafx.base',
+                'javafx.graphics',
+                'javafx.media',
+                'javafx.swing',
+                'javafx.web' ]
+}
+ */
+
+//*****************************************************************************
+//******   VERSION   *****************************************************
+//*****************************************************************************
+
+
+String version_properties_file = './src/main/resources/ru/apertum/qsystem/common/version.properties';
+File f1 = new File(version_properties_file);
+if (f1.exists()) {
+    Properties props = new Properties()
+    props.load(new FileInputStream(f1))
+    version = props.version
+
+
+    print 'Prepare data... '
+    props.date = new Date().format("dd.MM.yyyy");
+    println(props.date)
+
+    String bld = props.build;
+    int bldNum = 0;
+    if (bld != null && bld.matches("\\d+")) {
+        bldNum = Integer.parseInt(bld);
+    }
+    props.build = "" + ++bldNum;
+    println('Program version: ' + version)
+    println('Build version: ' + props.build)
+
+    FileOutputStream outputStream = new FileOutputStream(f1);
+    props.store(outputStream, "from gradle")
+    outputStream.flush();
+    outputStream.close();
+
+} else {
+    version = '2.0-SNAPSHOT'
+}
+
+//*****************************************************************************
+//******   COMMON   *****************************************************
+//*****************************************************************************
+
+repositories {
+    mavenCentral()
+    jcenter()
+    // You may define additional repositories, or even remove "mavenCentral()".
+    // Read more about repositories here:
+    //   http://www.gradle.org/docs/current/userguide/dependency_management.html#sec:repositories
+    maven {
+        url "https://plugins.gradle.org/m2/"
+    }
+
+    flatDir {
+        dirs 'lib'
+    }
+}
+
+dependencies {
+    compile project(":QResources")
+
+    // это для плагина izpack
+    izpack('org.codehaus.izpack:izpack:5.1.2') { transitive = true }
+    izpack('org.codehaus.izpack:izpack-ant:5.1.2') { transitive = true }
+    izpack('org.codehaus.izpack:izpack-core:5.1.2') { transitive = true }
+    izpack('org.codehaus.izpack:izpack-panel:5.1.2') { transitive = true }
+    izpack('org.codehaus.izpack:izpack-api:5.1.2') { transitive = true }
+    izpack('org.codehaus.izpack:izpack-compiler:5.1.2') { transitive = true }
+    izpack('org.codehaus.izpack:izpack-dist:5.1.2') { transitive = true }
+    izpack('org.codehaus.izpack:izpack-gui:5.1.2') { transitive = true }
+    izpack('org.codehaus.izpack:izpack-native:5.1.2') { transitive = true }
+    izpack('org.codehaus.izpack:izpack-native-parent:5.1.2') { transitive = true }
+    izpack('org.codehaus.izpack:izpack-tools:5.1.2') { transitive = true }
+    izpack('org.codehaus.izpack:izpack-util:5.1.2') { transitive = true }
+    izpack('org.codehaus.izpack:izpack-event:5.1.2') { transitive = true }
+
+    /*jdk12
+    compile group: 'javax.xml.bind', name: 'jaxb-api', version: '2.3.1'
+    */
+
+    compile(group: 'org.jdesktop', name: 'appframework', version: '1.0.3')
+    compile(group: 'org.netbeans.external', name: 'AbsoluteLayout', version: 'RELEASE111')
+    compile(group: 'com.toedter', name: 'jcalendar', version: '1.4')
+
+    testCompile 'org.testng:testng:6.14.3'
+    testCompile "org.mockito:mockito-core:2.18.3"
+    testCompile "org.mockito:mockito-inline:2.18.3"
+    testCompile group: 'org.powermock', name: 'powermock-module-testng', version: '1.7.1'
+    testCompile group: 'org.powermock', name: 'powermock-api-mockito2', version: '1.7.1'
+
+    compile fileTree(dir: 'lib', include: '**/*.jar')
+
+    compile(group: 'mysql', name: 'mysql-connector-java', version: '8.0.17') { transitive = false }
+    compile(group: 'com.h2database', name: 'h2', version: '1.4.197') { transitive = false }
+
+    compile(group: 'org.hibernate', name: 'hibernate-c3p0', version: '5.3.6.Final') {
+        transitive = true
+        exclude group: 'dom4j'
+    }
+    compile(group: 'org.hibernate', name: 'hibernate-core', version: '5.3.6.Final') {
+        transitive = true
+        exclude group: 'dom4j'
+    }
+    compile(group: 'org.hibernate.javax.persistence', name: 'hibernate-jpa-2.1-api', version: '1.0.2.Final') { transitive = false }
+
+    compile(group: 'org.apache.logging.log4j', name: 'log4j-api', version: '2.11.1') { transitive = false }
+    compile(group: 'org.apache.logging.log4j', name: 'log4j-core', version: '2.11.1') { transitive = false }
+    compile(group: 'org.apache.logging.log4j', name: 'log4j-slf4j18-impl', version: '2.11.1') { transitive = false }
+
+    compile(group: 'org.dom4j', name: 'dom4j', version: '2.1.1') { transitive = false }
+    compile(group: 'org.reflections', name: 'reflections', version: '0.9.11') { transitive = false }
+    compile(group: 'com.lowagie', name: 'itext', version: '4.2.2') { transitive = false }
+    compile(group: 'net.java.dev.beansbinding', name: 'beansbinding', version: '1.2.1') { transitive = false }
+    compile(group: 'net.sourceforge.barbecue', name: 'barbecue', version: '1.5-beta1') { transitive = false }
+    compile(group: 'com.google.zxing', name: 'core', version: '3.3.2') { transitive = false }
+
+    compile(group: 'commons-collections', name: 'commons-collections', version: '3.2.2') { transitive = false }
+    compile(group: 'commons-logging', name: 'commons-logging', version: '1.2') { transitive = false }
+    compile(group: 'commons-pool', name: 'commons-pool', version: '1.6') { transitive = false }
+    compile(group: 'org.apache.commons', name: 'commons-lang3', version: '3.7') { transitive = false }
+    compile(group: 'commons-beanutils', name: 'commons-beanutils', version: '1.9.3') { transitive = false }
+    compile(group: 'commons-digester', name: 'commons-digester', version: '2.1') { transitive = false }
+    compile(group: 'commons-dbcp', name: 'commons-dbcp', version: '1.4') { transitive = false }
+    compile(group: 'org.apache.commons', name: 'commons-configuration2', version: '2.2') { transitive = false }
+    compile(group: 'commons-codec', name: 'commons-codec', version: '1.11') { transitive = false }
+    compile(group: 'commons-cli', name: 'commons-cli', version: '1.4') { transitive = false }
+    compile(group: 'org.apache.commons', name: 'commons-jexl3', version: '3.1') { transitive = false }
+
+
+    compile(group: 'jfree', name: 'jcommon', version: '1.0.16') { transitive = false }
+    compile(group: 'jfree', name: 'jfreechart', version: '1.0.13') { transitive = false }
+
+    compile(group: 'javax.help', name: 'javahelp', version: '2.0.05') { transitive = false }
+
+    compile(group: 'com.googlecode.sli4j', name: 'sli4j-slf4j-log4j', version: '2.0') { transitive = false }
+
+    compile(group: 'org.apache.httpcomponents', name: 'httpcore', version: '4.1') { transitive = false }
+    compile(group: 'org.apache.httpcomponents', name: 'httpcore-nio', version: '4.1') { transitive = false }
+
+    compile(group: 'net.sf.jasperreports', name: 'jasperreports', version: '5.2.0') { transitive = false }
+    compile(group: 'net.sf.jasperreports', name: 'jasperreports-fonts', version: '4.0.0') { transitive = false }
+
+    compile(group: 'com.google.code.gson', name: 'gson', version: '2.8.5') { transitive = false }
+    compile(group: 'com.google.guava', name: 'guava', version: '24.1-jre') { transitive = false }
+
+    compile(group: 'com.github.spullara.mustache.java', name: 'compiler', version: '0.9.5') { transitive = false }
+
+    compile(group: 'org.eclipse.jetty', name: 'jetty-server', version: "${jettyVersion}") { transitive = false }
+    compile(group: 'org.eclipse.jetty', name: 'jetty-util', version: "${jettyVersion}") { transitive = false }
+    compile(group: 'org.eclipse.jetty', name: 'jetty-continuation', version: "${jettyVersion}") { transitive = false }
+    compile(group: 'org.eclipse.jetty', name: 'jetty-http', version: "${jettyVersion}") { transitive = false }
+    compile(group: 'org.eclipse.jetty', name: 'jetty-io', version: "${jettyVersion}") { transitive = false }
+    compile(group: 'org.eclipse.jetty', name: 'jetty-servlet', version: "${jettyVersion}") { transitive = false }
+    compile(group: 'org.eclipse.jetty', name: 'jetty-servlets', version: "${jettyVersion}") { transitive = false }
+    compile(group: 'org.eclipse.jetty', name: 'jetty-security', version: "${jettyVersion}") { transitive = false }
+    compile(group: 'org.eclipse.jetty', name: 'jetty-webapp', version: "${jettyVersion}") { transitive = false }
+    //compile(group: 'org.eclipse.jetty', name: 'jetty-jsp', version: "${jettyVersion}") { transitive = false }
+    compile(group: 'org.eclipse.jetty', name: 'jetty-runner', version: "${jettyVersion}") { transitive = false }
+    compile(group: 'org.eclipse.jetty', name: 'jetty-xml', version: "${jettyVersion}") { transitive = false }
+    compile(group: 'org.eclipse.jetty', name: 'jetty-annotations', version: "${jettyVersion}") { transitive = false }
+
+    compile(group: 'org.glassfish', name: 'javax.servlet', version: '3.1.1') { transitive = false }
+    compile(group: 'javax.mail', name: 'mail', version: '1.4.7') { transitive = false }
+    compile(group: 'net.lingala.zip4j', name: 'zip4j', version: '1.3.2') { transitive = false }
+    compile(group: 'groovy', name: 'groovy-all', version: '1.1-rc-1') { transitive = false }
+}
+
+jar {
+    archiveName = archivesBaseName + '.jar'
+
+    entryCompression ZipEntryCompression.STORED
+    manifest {
+        attributes(
+                'Manifest-Version': '1.0',
+                'Class-Path': configurations.compile.collect { "lib/$it.name" }.join(' '),
+                'Main-Class': 'ru.apertum.qsystem.client.forms.FAdmin',
+                'Launcher-Agent-Class': 'ru.apertum.qsystem.extra.Agent'
+        )
+    }
+}
+
+//*****************************************************************************
+//******   FOR NETBEANS   *****************************************************
+//*****************************************************************************
+
+task runAdmin(dependsOn: 'classes', type: JavaExec) {
+    doFirst {
+        main = 'ru.apertum.qsystem.client.forms.FAdmin'
+        classpath = sourceSets.main.runtimeClasspath
+        args 'ru.apertum.qsystem.client.forms.FAdmin'
+        args '-ide'
+        args '--debug'
+        args '-uep'
+        systemProperty 'simple.message', 'Hello '
+    }
+    doLast {}
+}
+
+task debugAdmin(dependsOn: 'classes', type: JavaExec) {
+    doFirst {
+        debug = true
+        main = 'ru.apertum.qsystem.client.forms.FAdmin'
+        classpath = sourceSets.main.runtimeClasspath
+        args 'ru.apertum.qsystem.client.forms.FAdmin'
+        args '-ide'
+        args '--debug'
+        args '-uep'
+        systemProperty 'simple.message', 'Hello '
+    }
+    doLast {}
+}
+
+task runServer(dependsOn: 'classes', type: JavaExec) {
+    doFirst {
+        main = 'ru.apertum.qsystem.server.QServer'
+        classpath = sourceSets.main.runtimeClasspath
+        args 'ru.apertum.qsystem.server.QServer'
+        args '-ide'
+        args '--debug'
+        args '-http'
+        args '8081'
+        systemProperty 'simple.message', 'Hello '
+    }
+    doLast {}
+}
+
+task debugServer(dependsOn: 'classes', type: JavaExec) {
+    doFirst {
+        debug = true
+        main = 'ru.apertum.qsystem.server.QServer'
+        classpath = sourceSets.main.runtimeClasspath
+        args 'ru.apertum.qsystem.server.QServer'
+        args '-ide'
+        args '--debug'
+        args '-http'
+        args '8081'
+        systemProperty 'simple.message', 'Hello '
+    }
+    doLast {}
+}
+
+task runClient(dependsOn: 'classes', type: JavaExec) {
+    doFirst {
+        main = 'ru.apertum.qsystem.client.forms.FClient'
+        classpath = sourceSets.main.runtimeClasspath
+        args 'ru.apertum.qsystem.client.forms.FClient'
+        args '-ide'
+        args '-s'
+        args '127.0.0.1'
+        args '-cport'
+        args '3129'
+        args '-sport'
+        args '3128'
+        args '-cfg'
+        args 'config/clientboard.xml'
+        args '+cfgfx'
+        args 'config/clientboardfx.properties'
+        args '++point'
+        args '234'
+        args '-d'
+        args '++terminal'
+        args '-np'
+        systemProperty 'simple.message', 'Hello '
+    }
+    doLast {}
+}
+
+task debugClient(dependsOn: 'classes', type: JavaExec) {
+    doFirst {
+        debug = true
+        main = 'ru.apertum.qsystem.client.forms.FClient'
+        classpath = sourceSets.main.runtimeClasspath
+        args 'ru.apertum.qsystem.client.forms.FClient'
+        args '-ide'
+        args '-s'
+        args '127.0.0.1'
+        args '-cport'
+        args '3129'
+        args '-sport'
+        args '3128'
+        args '-cfg'
+        args 'config/clientboard.xml'
+        args '+cfgfx'
+        args 'config/clientboardfx.properties'
+        args '++point'
+        args '234'
+        args '-d'
+        args '++terminal'
+        args '-np'
+        systemProperty 'simple.message', 'Hello '
+    }
+    doLast {}
+}
+
+task runDesktop(dependsOn: 'classes', type: JavaExec) {
+    doFirst {
+        main = 'ru.apertum.qsystem.client.fx.Desktop'
+        classpath = sourceSets.main.runtimeClasspath
+        args 'ru.apertum.qsystem.client.fx.Desktop'
+        args '-ide'
+        args '-s'
+        args '127.0.0.1'
+        args '-cport'
+        args '3129'
+        args '-sport'
+        args '3128'
+        args '-cfg'
+        args 'config/clientboardZ.xml'
+        args '++point'
+        args '234'
+        args '-d'
+        args '++terminal'
+        args '-np'
+    }
+    doLast {}
+}
+
+task debugDesktop(dependsOn: 'classes', type: JavaExec) {
+    doFirst {
+        debug = true
+        main = 'ru.apertum.qsystem.client.fx.Desktop'
+        classpath = sourceSets.main.runtimeClasspath
+        args 'ru.apertum.qsystem.client.fx.Desktop'
+        args '-ide'
+        args '-s'
+        args '127.0.0.1'
+        args '-cport'
+        args '3129'
+        args '-sport'
+        args '3128'
+        args '-cfg'
+        args 'config/clientboardZ.xml'
+        args '++point'
+        args '234'
+        args '-d'
+        args '++terminal'
+        args '-np'
+    }
+    doLast {}
+}
+
+task runWelcome(dependsOn: 'classes', type: JavaExec) {
+    doFirst {
+        main = 'ru.apertum.qsystem.client.forms.FWelcome'
+        classpath = sourceSets.main.runtimeClasspath
+        args 'ru.apertum.qsystem.client.forms.FWelcome'
+        args '-ide'
+        args '-s'
+        args '127.0.0.1'
+        args '-sport'
+        args '3128'
+        args '-cport'
+        args '3129'
+        args '--debug'
+        args '-wm'
+        args 'touch'
+        //args '+-wm,--welcome-mode <touch,info,med,btn,kbd>'
+        args '+demo'
+        args '+clangs'
+        args '+keyboard'
+        args '-ndiv'
+        args '->'
+        args '-httpg'
+        args '8081'
+        systemProperty 'simple.message', 'Hello '
+    }
+    doLast {}
+}
+
+task debugWelcome(dependsOn: 'classes', type: JavaExec) {
+    doFirst {
+        debug = true
+        main = 'ru.apertum.qsystem.client.forms.FWelcome'
+        classpath = sourceSets.main.runtimeClasspath
+        args 'ru.apertum.qsystem.client.forms.FWelcome'
+        args '-ide'
+        args '-s'
+        args '127.0.0.1'
+        args '-sport'
+        args '3128'
+        args '-cport'
+        args '3129'
+        args '--debug'
+        args '-wm'
+        args 'touch'
+        args '+info'
+        args '+buttons'
+        args '+demo'
+        args '+clangs'
+        args '+keyboard'
+        args '-ndiv'
+        args '->'
+        args '-httpg'
+        args '8081'
+        systemProperty 'simple.message', 'Hello '
+    }
+    doLast {}
+}
+
+task runReception(dependsOn: 'classes', type: JavaExec) {
+    doFirst {
+        main = 'ru.apertum.qsystem.client.forms.FReception'
+        classpath = sourceSets.main.runtimeClasspath
+        args 'ru.apertum.qsystem.client.forms.FReception'
+        args '-ide'
+        args '--debug'
+        args '-s'
+        args '127.0.0.1'
+        args '-cport'
+        args '3129'
+        args '-sport'
+        args '3128'
+        systemProperty 'simple.message', 'Hello '
+    }
+    doLast {}
+}
+
+task debugReception(dependsOn: 'classes', type: JavaExec) {
+    doFirst {
+        debug = true
+        main = 'ru.apertum.qsystem.client.forms.FReception'
+        classpath = sourceSets.main.runtimeClasspath
+        args 'ru.apertum.qsystem.client.forms.FReception'
+        args '-ide'
+        args '--debug'
+        args '-s'
+        args '127.0.0.1'
+        args '-cport'
+        args '3129'
+        args '-sport'
+        args '3128'
+        systemProperty 'simple.message', 'Hello '
+    }
+    doLast {}
+}
+
+task runConfigServer(dependsOn: 'classes', type: JavaExec) {
+    doFirst {
+        main = 'ru.apertum.qsystem.client.forms.FServerConfig'
+        classpath = sourceSets.main.runtimeClasspath
+        args 'ru.apertum.qsystem.client.forms.FServerConfig'
+        args '-ide'
+        systemProperty 'simple.message', 'Hello '
+    }
+    doLast {}
+}
+
+task debugConfigServer(dependsOn: 'classes', type: JavaExec) {
+    doFirst {
+        debug = true
+        main = 'ru.apertum.qsystem.client.forms.FServerConfig'
+        classpath = sourceSets.main.runtimeClasspath
+        args 'ru.apertum.qsystem.client.forms.FServerConfig'
+        args '-ide'
+        systemProperty 'simple.message', 'Hello '
+    }
+    doLast {}
+}
+
+task runTabloRedactor(dependsOn: 'classes', type: JavaExec) {
+    doFirst {
+        main = 'ru.apertum.qsystem.client.TabloRedactor'
+        classpath = sourceSets.main.runtimeClasspath
+        args 'ru.apertum.qsystem.client.TabloRedactor'
+        args '-tcfg'
+        args 'config/fractal-part-board.xml'
+        systemProperty 'simple.message', 'Hello '
+    }
+    doLast {}
+}
+
+task debugTabloRedactor(dependsOn: 'classes', type: JavaExec) {
+    doFirst {
+        debug = true
+        main = 'ru.apertum.qsystem.client.TabloRedactor'
+        classpath = sourceSets.main.runtimeClasspath
+        args 'ru.apertum.qsystem.client.TabloRedactor'
+        args '-tcfg'
+        args 'config/fractal-part-board.xml'
+        systemProperty 'simple.message', 'Hello '
+    }
+    doLast {}
+}
+
+task runUB(dependsOn: 'classes', type: JavaExec) {
+    doFirst {
+        main = 'ru.apertum.qsystem.ub485.core.UBForm'
+        classpath = sourceSets.main.runtimeClasspath
+        args 'ru.apertum.qsystem.ub485.core.UBForm'
+        args '-ide'
+        args '+start'
+        args '--debug'
+        systemProperty 'simple.message', 'Hello '
+    }
+    doLast {}
+}
+
+task debugUB(dependsOn: 'classes', type: JavaExec) {
+    doFirst {
+        debug = true
+        main = 'ru.apertum.qsystem.ub485.core.UBForm'
+        classpath = sourceSets.main.runtimeClasspath
+        args 'ru.apertum.qsystem.ub485.core.UBForm'
+        args '-ide'
+        args '+start'
+        args '--debug'
+        systemProperty 'simple.message', 'Hello '
+    }
+    doLast {}
+}
+
+//*****************************************************************************
+//******   MAKE INSTALL   *****************************************************
+//*****************************************************************************
+
+
+task copyDeps(type: Copy) {
+    from configurations.compile
+    into 'dist/lib/'
+}
+
+task copylib(type: Copy) {
+    dependsOn copyDeps
+    from 'build/libs'
+    into 'dist/'
+}
+// выполнить этот такс чтобы собрать папку после компиляции на манер анта
+task dist() {
+    dependsOn copylib
+}
+
+// зависимости выполняются по алфавиту по ходу.
+task acls() {
+    doFirst {
+        println 'remove temp folders... '
+        delete 'build', 'dist', 'out'
+    }
+}
+
+// выполнить этот таск для сбора инсталляхи. Инсталяха собитерся батником дляустановленного фреймворка.
+task makeinstall(type: Exec) {
+
+    doFirst {
+        println 'install package... '
+        workingDir '/installation/'
+        commandLine workingDir.toString() + '/makeInstall.bat'
+    }
+
+    doLast {
+        println 'Install package has been created!'
+    }
+}
+
+String getBranch() {
+    File f = new File("./.git/HEAD");
+    if (f.exists()) {
+        println "File ./.git/HEAD"
+        Scanner scanner = new Scanner(f, "UTF-8");
+        String text = scanner.useDelimiter("\\A").next().trim();
+        scanner.close();
+        String[] ss = text.split("/");
+        text = ss[ss.length - 1];
+        println text;
+        println "--end";
+        return text;
+    } else {
+        println "No file"
+        return "";
+    }
+}
+
+// зависимости выполняются по алфавиту по ходу.
+task aCiVersion() {
+    doFirst {
+        println 'Prepare version... '
+        File f = new File(version_properties_file);
+        if (f.exists()) {
+            Properties props = new Properties()
+            props.load(new FileInputStream(f))
+            props.version = props.version + '_' + new Date().format("MMdd") + "_" + getBranch();
+            version = props.version;
+            props.date = new Date().format("dd.MM.yyyy hh:mm");
+            FileOutputStream outputStream = new FileOutputStream(f);
+            props.store(outputStream, "from gradle")
+            outputStream.flush();
+            outputStream.close();
+        }
+    }
+}
+
+// выполнить этот таск для CI и сбора инсталляхи, инсталяха собирется градлом, подтягивая зависимости.
+task ci() {
+
+    doFirst {
+        println 'run izPack... '
+        izPackCreateInstaller.start()
+    }
+
+    doLast {
+        println 'CI: Install package has been created!'
+    }
+}
+
+// выполнить этот таск чтобы все пересобрать и собрать инсталяху. Сборка инсталяхи будет подтянутыми из m2 библиотеками.
+task makebuild() {
+
+    doFirst {
+        println 'run izPack... '
+        izPackCreateInstaller.start()
+    }
+
+    doLast {
+        println 'CI: Install package has been created!'
+    }
+}
+
+task bzip(type: Zip) {
+    File f = new File(version_properties_file);
+    if (f.exists()) {
+        from './readme/'
+        include 'readme_rus.txt', 'readme_eng.txt', 'readme_spa.txt', 'readme_astra-linux.txt'
+        from './installation/'
+        include 'install.jar'
+        from './installation/resource/txt/'
+        include 'install.bat', 'install.sh'
+        Properties props = new Properties()
+        props.load(new FileInputStream(f))
+        archiveName 'qsystem-' + props.version + '.zip'
+        destinationDir(file('./building/'))
+    }
+
+    doLast {
+        println 'ZIP: ' + './building/' + archiveName
+    }
+}
+
+task bzipCi(type: Zip) {
+
+    File f = new File(version_properties_file);
+    if (f.exists()) {
+        from './readme/'
+        include 'readme_rus.txt', 'readme_eng.txt', 'readme_spa.txt', 'readme_astra-linux.txt'
+        from './installation/'
+        include 'install.jar'
+        from './installation/resource/txt/'
+        include 'install.bat', 'install.sh'
+        Properties props = new Properties()
+        props.load(new FileInputStream(f))
+        archiveName 'qsystem-' + props.version + '.zip'
+        println('archiveName: ' + archiveName);
+        destinationDir(file('./ci/'))
+    }
+
+    doLast {
+        println 'ZIP: ' + './ci/' + archiveName
+    }
+
+}
+
+// это для плагина izpack, просто нужно чтоб работал плагин, т.е. настройки и параметры
+task izpack {
+    baseDir = file("installation")
+    installFile = file('installation/install.xml')
+    outputFile = file("installation/install.jar")
+    compression = 'deflate'
+    compressionLevel = 9
+
+    appProperties = ['app.group': group, 'app.name': 'QSystem', 'app.title': 'QMS QSystem', 'app.version': version, 'app.subpath': "QSystem-$version"]
+}
+
+// выполнить что бы создать sh файл move.sh в папке ci/qsystem
+task createsh {
+
+    doFirst {
+        File fout = new File("move.sh");
+        FileOutputStream fos = new FileOutputStream(fout);
+        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(fos));
+        bw.writeLine('#!/bin/sh');
+        bw.writeLine('fileout=$(ls ci/qsystem*)');
+        bw.writeLine('echo $fileout');
+        bw.writeLine('curl -X POST --user "$1" "https://api.bitbucket.org/2.0/repositories/$2/$3/downloads" --form files=@"$fileout"');
+        println('curl -X POST --user "$1" "https://api.bitbucket.org/2.0/repositories/$2/$3/downloads" --form files=@"$fileout"');
+        bw.writeLine('echo curl -X POST --user "$1" "https://api.bitbucket.org/2.0/repositories/$2/$3/downloads" --form files=@"$fileout"');
+        bw.close();
+    }
+}
+
+// тут не забываем что зависимости разрешаются в алфавитном порядке. Нужен установленный IzPack
+makeinstall.dependsOn(acls)
+makeinstall.dependsOn(build)
+makeinstall.dependsOn(copylib)
+makeinstall.finalizedBy(bzip)
+
+// выполнить этот таск ci чтобы все пересобрать и собрать инсталяху в папку ci.
+aCiVersion.dependsOn(clean)
+ci.dependsOn(createsh)
+ci.dependsOn(aCiVersion)
+ci.dependsOn(acls)
+ci.dependsOn(build)
+ci.dependsOn(copylib)
+ci.finalizedBy(bzipCi)
+
+// выполнить этот таск makebuild чтобы все пересобрать и собрать инсталяху.
+makebuild.dependsOn(acls)
+makebuild.dependsOn(build)
+makebuild.dependsOn(copylib)
+makebuild.finalizedBy(bzip)

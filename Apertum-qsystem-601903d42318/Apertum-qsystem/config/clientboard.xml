@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<board monitor="1" visible="$clientboard" x="100" y="100">
+        <parameters>
+                <leftColumn visible="true">
+                        <caption/>
+                        <font>Dialog-plain-300</font>
+                        <icon/>
+                        <fontColors>
+                                <color>#ff0000</color>
+                        </fontColors>
+                </leftColumn>
+                <rightColumn visible="false">
+                        <caption/>
+                        <font>Dialog-plain-300</font>
+                        <icon/>
+                        <fontColors>
+                                <color>#00ff00</color>
+                        </fontColors>
+                </rightColumn>
+                <extColumn order="3" visible="false">
+                        <caption/>
+                        <font>Dialog-plain-300</font>
+                        <icon/>
+                        <fontColors>
+                                <color>#000000</color>
+                        </fontColors>
+                </extColumn>
+                <row>
+                        <lineBorders/>
+                        <lineColors>
+                                <color>#cccccc</color>
+                        </lineColors>
+                        <hint>клиент</hint>
+                        <hintColor>#cccccc</hintColor>
+                </row>
+                <header>
+                        <fontColor>#111222</fontColor>
+                        <font>Dialog-plain-30</font>
+                        <backgroundColor>#0186a0</backgroundColor>
+                        <border>10,10,10,10,#ffff00</border>
+                </header>
+                <rowCount>1</rowCount>
+                <columnCount>1</columnCount>
+                <backgroundImg>config/board/wall_ligth.jpg</backgroundImg>
+                <backgroundColor>#0186a0</backgroundColor>
+                <font>Dialog-plain-12</font>
+                <columnSeparator/>
+                <invitationMinTime>7</invitationMinTime>
+                <hideInvitationByStart>false</hideInvitationByStart>
+        </parameters>
+        <top size="0.19" visible="true">
+                <content><![CDATA[<html><p align=center><span style='font-size:95.0pt;color:red'>Point № 1. Come on, buddy!</span></p></html>]]></content>
+                <runningText/>
+                <speedRunningText>10</speedRunningText>
+                <font>Dialog-plain-45</font>
+                <fontColor>#339322</fontColor>
+                <simpleDate>false</simpleDate>
+                <backgroundImg>config/board/wall.jpg</backgroundImg>
+                <videoFile/>
+                <fractal/>
+                <nextTable visible="false">
+                        <columnCount>1</columnCount>
+                        <rowCount>5</rowCount>
+                        <caption>Ближайшие</caption>
+                        <border>0</border>
+                        <font>Dialog-plain-45</font>
+                        <fontColor>#339322</fontColor>
+                </nextTable>
+        </top>
+        <left size="0.09" visible="true">
+                <content><![CDATA[<html>
+<p align=center>
+<span style='font-size:130.0pt;color:red'>
+&#8658;
+</br>
+&#8658;
+</span>
+</p>
+</html>]]></content>
+                <runningText/>
+                <speedRunningText>4</speedRunningText>
+                <font>Dialog-plain-70</font>
+                <fontColor>#222444</fontColor>
+                <simpleDate>false</simpleDate>
+                <backgroundImg>config/board/wall_ligth.jpg</backgroundImg>
+                <videoFile/>
+                <fractal/>
+                <nextTable visible="false">
+                        <columnCount>1</columnCount>
+                        <rowCount>5</rowCount>
+                        <caption>Ближайшие</caption>
+                        <border>0</border>
+                        <font>Dialog-plain-70</font>
+                        <fontColor>#222444</fontColor>
+                </nextTable>
+        </left>
+        <right size="0.71" visible="true">
+                <content><![CDATA[<html><div style='text-align: center;'>
+ <img src='config/board/q.png'><div><p align=center><span style='font-size:50.0pt;color:red'>Be ready for</span><br/><span style='font-size:70.0pt;color:red'>anything!</span></p></html>]]></content>
+                <runningText/>
+                <speedRunningText>7</speedRunningText>
+                <font>Dialog-plain-50</font>
+                <fontColor>#999111</fontColor>
+                <simpleDate>false</simpleDate>
+                <backgroundImg>config/board/wall_ligth.jpg</backgroundImg>
+                <videoFile>d:/test.mpg</videoFile>
+                <fractal/>
+                <nextTable visible="false">
+                        <columnCount>1</columnCount>
+                        <rowCount>5</rowCount>
+                        <caption>Ближайшие</caption>
+                        <border>0</border>
+                        <font>Dialog-plain-50</font>
+                        <fontColor>#999111</fontColor>
+                </nextTable>
+        </right>
+        <bottom size="0.72" visible="true">
+                <content/>
+                <runningText>Добро пожаловать  Welcome  Mire se vini  Welkomma  Ahlan wa sahlan  Bari galoust  Xos gelmissiniz</runningText>
+                <speedRunningText>4</speedRunningText>
+                <font>Dialog-plain-50</font>
+                <fontColor>#111111</fontColor>
+                <simpleDate>false</simpleDate>
+                <backgroundImg>config/board/wall.jpg</backgroundImg>
+                <videoFile/>
+                <fractal/>
+                <nextTable visible="false">
+                        <columnCount>1</columnCount>
+                        <rowCount>5</rowCount>
+                        <caption>Ближайшие</caption>
+                        <border>0</border>
+                        <font>Dialog-plain-50</font>
+                        <fontColor>#111111</fontColor>
+                </nextTable>
+        </bottom>
+        <bottom2 size="0.36" visible="true">
+                <content/>
+                <runningText>Ожидайте своей очереди</runningText>
+                <speedRunningText>4</speedRunningText>
+                <font>Dialog-plain-110</font>
+                <fontColor>#134215</fontColor>
+                <simpleDate>true</simpleDate>
+                <backgroundImg>config/board/wall.jpg</backgroundImg>
+                <videoFile/>
+                <fractal/>
+                <nextTable visible="false">
+                        <columnCount>1</columnCount>
+                        <rowCount>5</rowCount>
+                        <caption>Ближайшие</caption>
+                        <border>0</border>
+                        <font>Dialog-plain-110</font>
+                        <fontColor>#134215</fontColor>
+                </nextTable>
+        </bottom2>
+        <invitePanel show="false" x="0" y="0">
+                <backgroundImg/>
+                <width>0</width>
+                <height>0</height>
+                <showDelay>0</showDelay>
+                <htmlText/>
+        </invitePanel>
+</board>
