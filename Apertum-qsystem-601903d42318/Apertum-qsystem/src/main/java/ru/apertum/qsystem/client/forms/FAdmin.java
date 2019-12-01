@@ -176,6 +176,8 @@ import java.util.Locale;
 import java.util.Properties;
 import java.util.ServiceLoader;
 import java.util.Set;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -5818,10 +5820,19 @@ public class FAdmin extends javax.swing.JFrame {
                     gc.set(GregorianCalendar.MILLISECOND, 0);
                     gc.add(GregorianCalendar.HOUR, 24);
                     final String find = dateFormat.format(gc.getTime());
-                    final PreparedStatement preparedStatement = "org.h2.Driver".equalsIgnoreCase(Dao.get().getDriverClassName())
-                            ? connection.prepareStatement(SQLH2)
-                            : connection.prepareStatement(SQLMY);
-                    preparedStatement.setString(1, std);
+                    final PreparedStatement preparedStatement;
+                    try {
+                        preparedStatement = "org.h2.Driver".equalsIgnoreCase(Dao.get().getDriverClassName())
+                                ? connection.prepareStatement(SQLH2)
+                                : connection.prepareStatement(SQLMY);
+                    } catch (SQLException ex) {
+                        Logger.getLogger(FAdmin.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    try {
+                        preparedStatement.setString(1, std);
+                    } catch (SQLException ex) {
+                        Logger.getLogger(FAdmin.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                     preparedStatement.setString(2, find);
                     try (ResultSet set = preparedStatement.executeQuery()) {
                         final Writer writer;
@@ -5884,6 +5895,8 @@ public class FAdmin extends javax.swing.JFrame {
                     catch(Exception e){
                         close();
                     }
+                    } catch (SQLException ex) {
+                        Logger.getLogger(FAdmin.class.getName()).log(Level.SEVERE, null, ex);
                     }
                     JOptionPane.showMessageDialog(fc,
                             txt("stat.saved"),

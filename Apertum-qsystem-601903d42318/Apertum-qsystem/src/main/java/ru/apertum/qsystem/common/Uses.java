@@ -947,8 +947,10 @@ public final class Uses {
      * @throws IOException при чтении файла.
      */
     public static String md5(String filePath) throws IOException {
+        
         try (FileInputStream fis = new FileInputStream(new File(filePath))) {
-            return org.apache.commons.codec.digest.DigestUtils.md5Hex(fis);
+            
+            return  org.apache.commons.codec.digest.DigestUtils.md5Hex(fis);
         }
     }
 
